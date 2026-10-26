@@ -280,6 +280,7 @@
       <button type="button" role="tab" id="tab-research" aria-controls="panel-research" aria-selected="true" data-tab="research">Research experience</button>
       <button type="button" role="tab" id="tab-work" aria-controls="panel-work" aria-selected="false" data-tab="work">Work experience</button>
       <button type="button" role="tab" id="tab-leadership" aria-controls="panel-leadership" aria-selected="false" data-tab="leadership">Leadership experience</button>
+      <button type="button" role="tab" id="tab-volunteer" aria-controls="panel-volunteer" aria-selected="false" data-tab="volunteer">Volunteer experience</button>
     </div>
 
     <div class="panel" id="panel-research" role="tabpanel" aria-labelledby="tab-research">
@@ -375,21 +376,6 @@
         </div>
       </article>
       <article class="row">
-        <div class="status"><strong>Policy team</strong>2026</div>
-        <div class="body">
-          <h3>YOUNGO 2026 GYS Taskforce</h3>
-          <p>Member of the policy team of the YOUNGO 2026 GYS Taskforce.</p>
-        </div>
-      </article>
-      <article class="row">
-        <div class="status"><strong>Ambassador</strong>Zindi</div>
-        <div class="body">
-          <p class="venue">27 November 2026 · CMU Africa</p>
-          <h3>Climate and Public Health Hackathon</h3>
-          <p>Organising the hackathon as a Zindi ambassador, with a target of 150 participants.</p>
-        </div>
-      </article>
-      <article class="row">
         <div class="status"><strong>Outreach</strong>14 Nov 2026</div>
         <div class="body">
           <h3>IEEE Research Paper Workshop</h3>
@@ -397,6 +383,26 @@
         </div>
       </article>
     </div>
+
+    <div class="panel" id="panel-volunteer" role="tabpanel" aria-labelledby="tab-volunteer">
+      <article class="row">
+        <div class="status"><strong>Ambassador</strong>Zindi</div>
+        <div class="body">
+          <p class="venue">Community ambassador</p>
+          <h3>Zindi Community Ambassador</h3>
+          <p>Organising the Climate and Public Health Hackathon on 27 November 2026 at CMU Africa, with a target of 150 participants.</p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Policy team</strong>2026</div>
+        <div class="body">
+          <p class="venue">YOUNGO</p>
+          <h3>GYS Global Taskforce</h3>
+          <p>Member of the policy team of the YOUNGO GYS Global Taskforce.</p>
+        </div>
+      </article>
+    </div>
+
   </section>
 
   <section id="achievements">
@@ -414,8 +420,8 @@
       </div>
       <div class="win">
         <p class="venue">Competitions</p>
-        <h3>Two Zindi challenges entered</h3>
-        <p class="muted">Climate Risk and Health Prediction, and Bias Bounty Mapping Equity.</p>
+        <h3>Zindi data science challenges</h3>
+        <p class="muted">Entered several challenges, including Climate Risk and Health Prediction and Bias Bounty Mapping Equity.</p>
       </div>
     </div>
   </section>
@@ -485,7 +491,7 @@
       });
     });
     var fromHash = location.hash.replace('#', '');
-    openTab(['research', 'work', 'leadership'].indexOf(fromHash) !== -1 ? fromHash : 'research');
+    openTab(['research', 'work', 'leadership', 'volunteer'].indexOf(fromHash) !== -1 ? fromHash : 'research');
 
   })();
 </script>
