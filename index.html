@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Personal academic website of Grace Kaimburi: machine learning for climate and health.">
+<title>Grace Kaimburi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap" rel="stylesheet">
+<style>
+  /* Layout concept: a quiet lab notebook. Fixed identity column on the left, a ledger of
+     work on the right (status in the margin, detail beside it), and one figure, a periodic
+     table coloured by block, tied to the DFT benchmark paper. */
+  :root {
+    --bg: #f1f5f4;
+    --fg: #13201e;
+    --muted: #4d5f5b;
+    --rule: #cbd7d4;
+    --accent: #0a6a62;
+    --accent-ink: #ffffff;
+    --tint: #dcebe7;
+    --surface: #fbfdfc;
+    --flag-fg: #7a4f00;
+    --flag-bg: #fff2d3;
+    --flag-line: #d9a93c;
+    --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c1413;
+      --fg: #e3eeeb;
+      --muted: #9bb0ab;
+      --rule: #24342f;
+      --accent: #55c9ba;
+      --accent-ink: #06211d;
+      --tint: #14302b;
+      --surface: #111c1a;
+      --flag-fg: #f0c45e;
+      --flag-bg: #2e2510;
+      --flag-line: #7d6320;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1413;
+    --fg: #e3eeeb;
+    --muted: #9bb0ab;
+    --rule: #24342f;
+    --accent: #55c9ba;
+    --accent-ink: #06211d;
+    --tint: #14302b;
+    --surface: #111c1a;
+    --flag-fg: #f0c45e;
+    --flag-bg: #2e2510;
+    --flag-line: #7d6320;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 3rem;
+    overflow-wrap: break-word;
+  }
+  a { color: var(--accent); text-underline-offset: 0.2em; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .shell {
+    max-width: 70rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+  @media (min-width: 58rem) {
+    .shell { grid-template-columns: 15.5rem minmax(0, 1fr); gap: 4rem; }
+    .side { position: sticky; top: 2.5rem; align-self: start; }
+  }
+
+  /* Identity column */
+  .side { display: flex; flex-direction: column; gap: 1.75rem; min-width: 0; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.6rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 7vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .tag { margin: 0.9rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+  @media (min-width: 58rem) { nav ul { flex-direction: column; gap: 0.35rem; } }
+  nav a {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.98rem;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .facts { margin: 0; display: grid; gap: 0.7rem; font-size: 0.95rem; }
+  .facts div { display: grid; gap: 0.1rem; }
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .facts dd { margin: 0; line-height: 1.4; }
+
+  /* Main column */
+  main { display: flex; flex-direction: column; gap: 4rem; min-width: 0; }
+  section { scroll-margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+  .sec-h { display: flex; align-items: baseline; gap: 1rem; }
+  .sec-h::after { content: ""; flex: 1; height: 1px; background: var(--rule); transform: translateY(-0.3em); }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-size: 1.7rem;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    margin: 0;
+    text-wrap: balance;
+  }
+  p { margin: 0; max-width: 40rem; }
+  .lede { font-size: 1.3rem; line-height: 1.55; max-width: 38rem; }
+  .muted { color: var(--muted); }
+
+  .interests { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .interests h3 { font-size: 1.05rem; }
+  .interests p { font-size: 0.97rem; color: var(--muted); margin-top: 0.35rem; }
+  .interests > div { border-top: 2px solid var(--accent); padding-top: 0.75rem; min-width: 0; }
+
+  /* Ledger rows */
+  .ledger { display: flex; flex-direction: column; }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem 2rem;
+    padding-block: 1.4rem;
+    border-top: 1px solid var(--rule);
+    min-width: 0;
+  }
+  .row:last-child { border-bottom: 1px solid var(--rule); }
+  @media (min-width: 40rem) { .row { grid-template-columns: 9.5rem minmax(0, 1fr); } }
+  .status {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .status strong { display: block; color: var(--accent); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+  .body { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+  .venue { font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); }
+  .body p { font-size: 1rem; }
+
+  /* Featured paper */
+  .feature {
+    display: grid;
+    gap: 1.5rem 2.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 1.6rem;
+    border-top: 2px solid var(--fg);
+  }
+  @media (min-width: 52rem) { .feature { grid-template-columns: minmax(0, 1fr) minmax(0, 20rem); align-items: start; } }
+  .feature h3 { font-size: 1.45rem; }
+  .feature .body { gap: 0.8rem; }
+  .figure { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+  .ptable {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .ptable i { aspect-ratio: 1; display: block; background: var(--accent); border-radius: 1px; }
+  .ptable i.gap { background: transparent; }
+  .ptable i.s { opacity: 1; }
+  .ptable i.p { opacity: 0.6; }
+  .ptable i.d { opacity: 0.35; }
+  .ptable i.f { opacity: 0.18; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .legend i { width: 0.7rem; height: 0.7rem; background: var(--accent); display: inline-block; border-radius: 1px; }
+  figcaption { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
+
+  /* Binding energy pipeline */
+  .pipeline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+  .step {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    background: var(--tint);
+    border-radius: 2px;
+  }
+  .step b { font-weight: 500; color: var(--accent); margin-right: 0.35rem; }
+  .eq {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 0.7rem 0.9rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  /* Pills and flags */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag-pill {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  .todo {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--flag-fg);
+    background: var(--flag-bg);
+    border: 1px dashed var(--flag-line);
+    padding: 0.1rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  /* Achievements */
+  .wins { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  .win {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  .win .venue { color: var(--accent); }
+  .win h3 { font-size: 1.05rem; }
+
+  .contact { display: grid; gap: 0.6rem; font-size: 1rem; }
+  .contact div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
+  .contact dt { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .contact dd { margin: 0; min-width: 0; }
+  dl.contact { margin: 0; }
+
+  footer {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <header>
+      <p class="eyebrow">Researcher</p>
+      <h1>Grace Kaimburi</h1>
+      <p class="tag">Machine learning for climate and health, and the policy that decides whether it gets used.</p>
+    </header>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#roles">Roles and service</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <dl class="facts">
+      <div><dt>Studying</dt><dd>MSEAI, Carnegie Mellon University Africa</dd></div>
+      <div><dt>Based in</dt><dd>Kigali, Rwanda</dd></div>
+      <div><dt>From</dt><dd>Kenya</dd></div>
+    </dl>
+  </aside>
+
+  <main>
+    <section id="about">
+      <div class="sec-h"><h2>About</h2></div>
+      <p class="lede">I am a master's student in Engineering Artificial Intelligence at Carnegie Mellon University Africa in Kigali. My research uses machine learning to find and test climate solutions, from materials that capture combustion pollutants to models that flag health risk early where data is scarce.</p>
+      <p>I also work on the policy side, including marine policy and port health at AGNES, because a model that nobody can act on does not cut emissions or protect a patient. I am preparing applications for doctoral study in AI for the environment.</p>
+      <div class="interests">
+        <div>
+          <h3>Climate solutions</h3>
+          <p>Machine learning surrogates for density functional theory, applied to adsorbents for combustion pollutants.</p>
+        </div>
+        <div>
+          <h3>Core machine learning</h3>
+          <p>Transfer learning for low resource settings, benchmarking, and surrogate modelling.</p>
+        </div>
+        <div>
+          <h3>Climate policy and health</h3>
+          <p>Marine and port health policy, climate risk and health prediction, and youth climate policy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="sec-h"><h2>Research</h2></div>
+
+      <article class="feature">
+        <div class="body">
+          <p class="venue">Accepted · Women in Machine Learning Workshop at NeurIPS 2026</p>
+          <h3>A periodic table wide DFT benchmark with machine learning surrogates for combustion pollutant adsorbents</h3>
+          <p>A benchmark of density functional theory binding energies across the periodic table, paired with machine learning surrogates, aimed at adsorbents for combustion pollutants.</p>
+          <div class="tags">
+            <span class="tag-pill">DFT</span>
+            <span class="tag-pill">Surrogate models</span>
+            <span class="tag-pill">Adsorption</span>
+            <span class="tag-pill">Air quality</span>
+          </div>
+        </div>
+        <figure class="figure" aria-label="Periodic table coloured by electron block">
+          <div class="ptable" id="ptable" aria-hidden="true"></div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="opacity:1"></i>s</span>
+            <span><i style="opacity:0.6"></i>p</span>
+            <span><i style="opacity:0.35"></i>d</span>
+            <span><i style="opacity:0.18"></i>f</span>
+          </div>
+          <figcaption>The periodic table by electron block, the scope of the benchmark.</figcaption>
+        </figure>
+      </article>
+
+      <div class="ledger">
+        <article class="row">
+          <div class="status"><strong>Accepted</strong>NeurIPS 2026</div>
+          <div class="body">
+            <p class="venue">Africa at NeurIPS workshop</p>
+            <h3>Early detection of hypertensive disorders of pregnancy in Sub Saharan African women</h3>
+            <p>Machine learning for the early detection of hypertensive disorders of pregnancy in women in Sub Saharan Africa.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="status"><strong>Independent study</strong>04 980</div>
+          <div class="body">
+            <p class="venue">With Prof. Ismaila Dabo</p>
+            <h3>Binding energies of CO2, CO and SO2 across the periodic table</h3>
+            <p>First principles calculations with Quantum ESPRESSO and ASE. Each element goes through the same three steps, so results compare cleanly across the table.</p>
+            <div class="pipeline" aria-label="Pipeline steps">
+              <span class="step"><b>1</b>Build</span>
+              <span class="step"><b>2</b>Calculate</span>
+              <span class="step"><b>3</b>Subtract</span>
+            </div>
+            <div class="eq">E_bind = E(surface + gas) − E(surface) − E(gas)</div>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="status"><strong>In progress</strong>AI4E</div>
+          <div class="body">
+            <p class="venue">Team project</p>
+            <h3>Detecting mobile money scam SMS in Rwanda</h3>
+            <p>Using transfer learning to detect scam SMS messages that target mobile money users in Rwanda.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="status"><strong>Ongoing</strong>Capstone</div>
+          <div class="body">
+            <p class="venue">With Inkomoko</p>
+            <h3>Extraction and deidentification pipeline for MERL data</h3>
+            <p>A pipeline that extracts monitoring, evaluation, research and learning (MERL) data and removes personal identifiers from it.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="status"><strong>Policy work</strong>AGNES</div>
+          <div class="body">
+            <p class="venue">Marine policy and port health</p>
+            <h3>Marine policy and port health at AGNES</h3>
+            <p>Work on marine policy and port health.</p>
+            <p><span class="todo">Add your role and dates</span></p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="status"><strong>Competitions</strong>Zindi</div>
+          <div class="body">
+            <p class="venue">Username NonnieKaimburi</p>
+            <h3>Climate Risk and Health Prediction Challenge, and Bias Bounty Mapping Equity Challenge</h3>
+            <p>Entered both challenges on Zindi, the African data science competition platform.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="roles">
+      <div class="sec-h"><h2>Roles and service</h2></div>
+      <div class="ledger">
+        <article class="row">
+          <div class="status"><strong>Chair</strong>AOAI</div>
+          <div class="body">
+            <h3>African Olympiad in AI</h3>
+            <p>Chairing the African Olympiad in AI. <a href="https://africa-oai.org" target="_blank" rel="noopener">africa-oai.org</a></p>
+          </div>
+        </article>
+        <article class="row">
+          <div class="status"><strong>Strategist</strong>Executive team</div>
+          <div class="body">
+            <h3>CMU Africa Research Club</h3>
+            <p>Member of the executive team at the research club of CMU Africa.</p>
+          </div>
+        </article>
+        <article class="row">
+          <div class="status"><strong>Policy team</strong>2026</div>
+          <div class="body">
+            <h3>YOUNGO 2026 GYS Taskforce</h3>
+            <p>Member of the policy team of the YOUNGO 2026 GYS Taskforce.</p>
+          </div>
+        </article>
+        <article class="row">
+          <div class="status"><strong>Teaching assistant</strong>CMU Africa</div>
+          <div class="body">
+            <h3>Course taught by Dr. Sarah Scheffler</h3>
+            <p>Grading and managing assessments in Gradescope.</p>
+          </div>
+        </article>
+        <article class="row">
+          <div class="status"><strong>Ambassador</strong>Zindi</div>
+          <div class="body">
+            <p class="venue">27 November 2026 · CMU Africa</p>
+            <h3>Climate and Public Health Hackathon</h3>
+            <p>Organising the hackathon as a Zindi ambassador, with a target of 150 participants.</p>
+          </div>
+        </article>
+        <article class="row">
+          <div class="status"><strong>Outreach</strong>14 Nov 2026</div>
+          <div class="body">
+            <h3>IEEE Research Paper Workshop</h3>
+            <p>Handling promotion for the workshop.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="sec-h"><h2>Achievements</h2></div>
+      <div class="wins">
+        <div class="win">
+          <p class="venue">NeurIPS 2026</p>
+          <h3>Two workshop papers accepted</h3>
+          <p class="muted">One at the Women in Machine Learning workshop and one at Africa at NeurIPS.</p>
+        </div>
+        <div class="win">
+          <p class="venue">Community</p>
+          <h3>Chair of the African Olympiad in AI</h3>
+          <p class="muted">A role held alongside the master's degree.</p>
+        </div>
+        <div class="win">
+          <p class="venue">Awards, scholarships, honours</p>
+          <h3><span class="todo">Add yours</span></h3>
+          <p class="muted">Include the name, the awarding body and the year for each.</p>
+        </div>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <div class="ledger" style="margin-top:0.75rem">
+          <article class="row">
+            <div class="status"><strong>Current</strong></div>
+            <div class="body">
+              <h3>MSEAI, Carnegie Mellon University Africa</h3>
+              <p>Master of Science in Engineering Artificial Intelligence, Kigali, Rwanda.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="status"><strong>Previous</strong></div>
+            <div class="body">
+              <h3><span class="todo">Add your undergraduate degree, institution and years</span></h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sec-h"><h2>Contact</h2></div>
+      <dl class="contact">
+        <div><dt>Email</dt><dd><span class="todo">Add your public email</span></dd></div>
+        <div><dt>Zindi</dt><dd>NonnieKaimburi</dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/GraceKaimburi" target="_blank" rel="noopener">github.com/GraceKaimburi</a></dd></div>
+        <div><dt>Links</dt><dd><a href="https://www.linkedin.com/in/grace-kaimburi/" target="_blank" rel="noopener">LinkedIn</a> · <span class="todo">Add Google Scholar</span></dd></div>
+      </dl>
+    </section>
+
+    <footer>Last updated 26 October 2026</footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    // Row layouts of the periodic table: which of the 18 columns hold an element.
+    var rows = [
+      [1, 18], [1, 2, 13, 14, 15, 16, 17, 18], [1, 2, 13, 14, 15, 16, 17, 18],
+      range(1, 18), range(1, 18), range(1, 18), range(1, 18), null,
+      range(4, 17), range(4, 17)
+    ];
+    function range(a, b) { var o = []; for (var i = a; i <= b; i++) o.push(i); return o; }
+    function block(r, c) {
+      if (r >= 8) return 'f';
+      if (c <= 2 || (r === 0 && c === 18)) return 's';
+      if (c >= 13) return 'p';
+      if (c === 3 && r >= 5) return 'f';
+      return 'd';
+    }
+    var host = document.getElementById('ptable');
+    if (!host) return;
+    var html = '';
+    rows.forEach(function (cols, r) {
+      for (var c = 1; c <= 18; c++) {
+        if (cols && cols.indexOf(c) !== -1) html += '<i class="' + block(r, c) + '"></i>';
+        else html += '<i class="gap"></i>';
+      }
+    });
+    host.innerHTML = html;
+  })();
+</script>
+
+</body>
+</html>
