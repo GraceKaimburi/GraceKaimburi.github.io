@@ -209,6 +209,16 @@
   .contact dt { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
   .contact dd { margin: 0; min-width: 0; }
 
+
+  .body ul { margin: 0.2rem 0 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; max-width: 42rem; font-size: 1rem; }
+  .links-line { font-size: 0.95rem; }
+  .win .links-line { margin-top: 0.2rem; }
+  .panel-list { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+  .skills { margin: 0; display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .skills div { display: grid; gap: 0.15rem; min-width: 0; }
+  .skills dt { font-weight: 700; font-size: 0.95rem; }
+  .skills dd { margin: 0; color: var(--muted); font-size: 0.97rem; }
+
   footer { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-block: 1rem 2.5rem; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -242,8 +252,8 @@
       <div>
         <p class="eyebrow">Researcher</p>
         <h1>Grace Kaimburi</h1>
-        <p class="lede">I use machine learning to find and test climate solutions, from materials that capture combustion pollutants to models that flag health risk early where data is scarce.</p>
-        <p class="more">I am a master's student in Engineering Artificial Intelligence at Carnegie Mellon University Africa in Kigali. I also work on the policy side, including marine policy and port health at AGNES, because a model that nobody can act on does not cut emissions or protect a patient. I am preparing applications for doctoral study in AI for the environment.</p>
+        <p class="lede">I am an AI engineer and researcher building technology that brings clarity, accountability and positive impact to people and the planet.</p>
+        <p class="more">My work blends machine learning, natural language processing and human centered design. I recently interned at the United Nations Climate Change Secretariat, and before that I was a Research Associate in Climate and AI at AGNES. I am a master's student in Engineering Artificial Intelligence at Carnegie Mellon University Africa in Kigali, and I am preparing applications for doctoral study in AI for the environment.</p>
         <div class="links">
           <a class="btn solid" href="https://github.com/GraceKaimburi" target="_blank" rel="noopener">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/grace-kaimburi/" target="_blank" rel="noopener">LinkedIn</a>
@@ -290,30 +300,44 @@
           <p class="venue">Women in Machine Learning workshop</p>
           <h3>A periodic table wide DFT benchmark with machine learning surrogates for combustion pollutant adsorbents</h3>
           <p>A benchmark of density functional theory adsorption energies across the periodic table, paired with machine learning surrogates, aimed at adsorbents for combustion pollutants.</p>
-          <p><a href="https://openreview.net/forum?id=6z1rW5Wcyo" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
+          <p class="links-line"><a href="https://openreview.net/forum?id=6z1rW5Wcyo" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
         </div>
       </article>
-
       <article class="row">
         <div class="status"><strong>Accepted</strong>NeurIPS 2026</div>
         <div class="body">
           <p class="venue">Africa at NeurIPS workshop</p>
           <h3>Early detection of hypertensive disorders of pregnancy in Sub Saharan African women</h3>
           <p>Machine learning for the early detection of hypertensive disorders of pregnancy in women in Sub Saharan Africa.</p>
-          <p><a href="https://openreview.net/forum?id=CrfL7sydY7" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
+          <p class="links-line"><a href="https://openreview.net/forum?id=CrfL7sydY7" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
         </div>
       </article>
-
       <article class="row">
         <div class="status"><strong>Paper</strong>Indaba 2023</div>
         <div class="body">
           <p class="venue">Deep Learning Indaba 2023</p>
-          <h3>AI driven financial model</h3>
-          <p>A paper at the Deep Learning Indaba 2023.</p>
-          <p><a href="https://openreview.net/forum?id=zRzPI7ThXi" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
+          <h3>AI driven financial modelling for climate change prediction</h3>
+          <p>Research on applications of AI in carbon credit modelling to forecast climate related financial risks.</p>
+          <p class="links-line"><a href="https://openreview.net/forum?id=zRzPI7ThXi" target="_blank" rel="noopener">Read the paper on OpenReview</a></p>
         </div>
       </article>
-
+      <article class="row">
+        <div class="status"><strong>Published</strong>BIRJ</div>
+        <div class="body">
+          <p class="venue">Baraton Interdisciplinary Research Journal</p>
+          <h3>Navigating trustworthy AI and addressing bias in the era of rapid technological emergence</h3>
+          <p>A paper on ethical AI, focused on frameworks that reduce algorithmic bias and promote fairness, transparency and accountability.</p>
+          <p class="links-line"><a href="https://birj.ueab.ac.ke/journal-articles/" target="_blank" rel="noopener">Journal articles</a></p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Patent</strong>KE/P/2023/4708</div>
+        <div class="body">
+          <p class="venue">Carnegie Mellon University Africa · Ongoing</p>
+          <h3>Carbon emission measurement and reporting system</h3>
+          <p>Designing and prototyping a device that tracks and reports CO2 emissions from vehicles in real time, so drivers and policymakers can understand, monitor and reduce transport carbon footprints.</p>
+        </div>
+      </article>
       <article class="row">
         <div class="status"><strong>Ongoing</strong>Independent study 04 980</div>
         <div class="body">
@@ -322,7 +346,6 @@
           <p>First principles calculations with Quantum ESPRESSO and ASE.</p>
         </div>
       </article>
-
       <article class="row">
         <div class="status"><strong>In progress</strong>AI4E</div>
         <div class="body">
@@ -335,11 +358,82 @@
 
     <div class="panel" id="panel-work" role="tabpanel" aria-labelledby="tab-work">
       <article class="row">
-        <div class="status"><strong>Policy work</strong>AGNES</div>
+        <div class="status"><strong>Sep 2026 to ongoing</strong>CMU Africa</div>
         <div class="body">
-          <p class="venue">Marine policy and port health</p>
-          <h3>Marine policy and port health at AGNES</h3>
-          <p>Work on marine policy and port health.</p>
+          <p class="venue">Carnegie Mellon University Africa</p>
+          <h3>Graduate Teaching Assistant, reappointed for a second term</h3>
+          <p>Reappointed for a second term based on performance in the previous semester, to continue earlier duties and take on expanded responsibilities in remote course delivery and on site technical support.</p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Mar to Aug 2026</strong>UNFCCC</div>
+        <div class="body">
+          <p class="venue">United Nations Climate Change Secretariat</p>
+          <h3>Intern</h3>
+          <ul>
+            <li>Designed the AR6 Navigator Tool, which delivers interpreted insights and practical strategies from Article 6 of the Paris Agreement to guide countries in carbon market engagement.</li>
+            <li>Developed the Carbon Corridor, a strategic simulation tool that gives government representatives hands on experience of taking part in international carbon markets.</li>
+            <li>Ran capacity building training for more than 1,000 government stakeholders under the Article 6 Academy, covering applicant selection, communications, session moderation and certification.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Jan to May 2026</strong>CMU Africa</div>
+        <div class="body">
+          <p class="venue">Carnegie Mellon University Africa</p>
+          <h3>Graduate Teaching Assistant</h3>
+          <ul>
+            <li>Developed and refined graduate level teaching materials that clarify complex technical concepts.</li>
+            <li>Led discussion sessions with academic mentorship and guided students through practical problem solving.</li>
+            <li>Managed course administration, including assignment workflows, deadlines and accurate grading with constructive feedback.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Sep 2024 to Aug 2025</strong>AGNES</div>
+        <div class="body">
+          <p class="venue">African Group of Negotiators Expert Support</p>
+          <h3>Research Associate, Climate and AI</h3>
+          <ul>
+            <li>Designed and launched AI tools that helped 20 African countries develop their NDC 3.0 and supported 5 African Parliaments on climate policy and accountability.</li>
+            <li>Built an NLP system that turns UN documents into insights for more than 500 young negotiators at COP.</li>
+            <li>Led and supported proposals for resource mobilisation that raised $100,000.</li>
+            <li>Secured partnerships with Google Research Africa and the African Institute for Mathematical Sciences (AIMS) to co facilitate a programme that trained more than 1,200 African climate scientists.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Oct 2024 to Jun 2025</strong>Remote</div>
+        <div class="body">
+          <p class="venue">The Possibilists, ChangemakerXChange</p>
+          <h3>Council Member</h3>
+          <ul>
+            <li>Advised on strategy and collective action projects so that youth perspectives shaped global priorities.</li>
+            <li>Ran the 2025 Possibilists survey across 110 countries and analysed responses from 2,261 young leaders.</li>
+            <li>Wrote sections of the 2025 Global Possibilists Report.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Apr to Dec 2024</strong>Remote</div>
+        <div class="body">
+          <p class="venue">The Diana Award</p>
+          <h3>Designer, Centre for Social Action platform</h3>
+          <ul>
+            <li>Designed key parts of the platform that equips young people with tools for activism, working with multidisciplinary teams.</li>
+            <li>Worked with stakeholders to match platform features to the real needs of young changemakers.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>May to Jul 2024</strong>Accra, Ghana</div>
+        <div class="body">
+          <p class="venue">Africa Centre for Energy Policy (ACEP)</p>
+          <h3>NextGeneration Resource Governance Leaders Program</h3>
+          <ul>
+            <li>Analysed policy frameworks and institutions to map Africa's resource governance landscape and find accountability gaps, then formulated 3 evidence based policy solutions.</li>
+            <li>Engaged more than 15 stakeholders from different sectors in governance dialogues.</li>
+          </ul>
         </div>
       </article>
       <article class="row">
@@ -350,22 +444,28 @@
           <p>A pipeline that extracts monitoring, evaluation, research and learning (MERL) data and removes personal identifiers from it.</p>
         </div>
       </article>
-      <article class="row">
-        <div class="status"><strong>Teaching assistant</strong>CMU Africa</div>
-        <div class="body">
-          <p class="venue">Course taught by Dr. Sarah Scheffler</p>
-          <h3>Teaching assistant</h3>
-          <p>Grading and managing assessments in Gradescope.</p>
-        </div>
-      </article>
     </div>
 
     <div class="panel" id="panel-leadership" role="tabpanel" aria-labelledby="tab-leadership">
       <article class="row">
-        <div class="status"><strong>Chair</strong>AOAI</div>
+        <div class="status"><strong>Board Chair</strong>AOAI</div>
         <div class="body">
           <h3>African Olympiad in AI</h3>
-          <p>Chairing the African Olympiad in AI. <a href="https://africa-oai.org" target="_blank" rel="noopener">africa-oai.org</a></p>
+          <p>Board Chair of the African Olympiad in Artificial Intelligence. <a href="https://www.africa-oai.org/" target="_blank" rel="noopener">africa-oai.org</a></p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Committee</strong>Indaba 2024</div>
+        <div class="body">
+          <h3>Deep Learning Indaba</h3>
+          <p>Member of the Applications and Selection Committee for the 2024 Deep Learning Indaba.</p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Key organiser</strong>2024 and 2025</div>
+        <div class="body">
+          <h3>Indaba X Kenya</h3>
+          <p>Key organiser of Indaba X Kenya in 2024 and 2025.</p>
         </div>
       </article>
       <article class="row">
@@ -402,39 +502,70 @@
         </div>
       </article>
     </div>
-
   </section>
 
   <section id="achievements">
     <div class="sec-h"><h2>Achievements</h2></div>
     <div class="wins">
       <div class="win">
+        <p class="venue">Patent</p>
+        <h3>Patent KE/P/2023/4708</h3>
+        <p class="muted">Carbon emission measurement and reporting system.</p>
+      </div>
+      <div class="win">
+        <p class="venue">Award · 2024</p>
+        <h3>Wangari Maathai Impact Award</h3>
+        <p class="muted">Listed among the 2024 award recipients.</p>
+        <p class="links-line"><a href="https://deeplearningindaba.com/blog/2024/08/the-2024-deep-learning-indaba-award-recipients/" target="_blank" rel="noopener">Recipients</a> · <a href="https://www.youtube.com/live/aV-E_fDHk7U" target="_blank" rel="noopener">Video</a></p>
+      </div>
+      <div class="win">
+        <p class="venue">Award</p>
+        <h3>Africa Innovation Award</h3>
+        <p class="muted">Listed among the award winners.</p>
+        <p class="links-line"><a href="https://aficta.africa/about-us/award-winners" target="_blank" rel="noopener">Award winners</a></p>
+      </div>
+      <div class="win">
         <p class="venue">NeurIPS 2026</p>
         <h3>Two workshop papers accepted</h3>
         <p class="muted">One at the Women in Machine Learning workshop and one at Africa at NeurIPS.</p>
       </div>
       <div class="win">
-        <p class="venue">Community</p>
-        <h3>Chair of the African Olympiad in AI</h3>
-        <p class="muted">A role held alongside the master's degree.</p>
+        <p class="venue">Degree</p>
+        <h3>First class honours</h3>
+        <p class="muted">BSc in Software Engineering with a GPA of 3.762 out of 4.0.</p>
       </div>
       <div class="win">
-        <p class="venue">Competitions</p>
-        <h3>Zindi data science challenges</h3>
-        <p class="muted">Entered several challenges, including Climate Risk and Health Prediction and Bias Bounty Mapping Equity.</p>
+        <p class="venue">Fundraising</p>
+        <h3>$100,000 mobilised</h3>
+        <p class="muted">Proposals led and supported at AGNES for resource mobilisation.</p>
       </div>
     </div>
   </section>
 
   <section id="education">
-    <div class="sec-h"><h2>Education</h2></div>
-    <article class="row" style="border-top:1px solid var(--rule)">
-      <div class="status"><strong>Current</strong></div>
-      <div class="body">
-        <h3>MSEAI, Carnegie Mellon University Africa</h3>
-        <p>Master of Science in Engineering Artificial Intelligence, Kigali, Rwanda.</p>
-      </div>
-    </article>
+    <div class="sec-h"><h2>Education and skills</h2></div>
+    <div class="panel-list">
+      <article class="row">
+        <div class="status"><strong>Aug 2025 to ongoing</strong>Kigali, Rwanda</div>
+        <div class="body">
+          <h3>Master of Science in Engineering Artificial Intelligence</h3>
+          <p>Carnegie Mellon University Africa.</p>
+        </div>
+      </article>
+      <article class="row">
+        <div class="status"><strong>Sep 2020 to Aug 2025</strong>Kenya</div>
+        <div class="body">
+          <h3>BSc in Software Engineering</h3>
+          <p>University of Eastern Africa, Baraton. First class honours, GPA 3.762 out of 4.0.</p>
+        </div>
+      </article>
+    </div>
+    <dl class="skills">
+      <div><dt>Programming and AI</dt><dd>Python, machine learning, deep learning, data analysis, text classification</dd></div>
+      <div><dt>Software and tools</dt><dd>GitHub, Jira, Tableau, Figma</dd></div>
+      <div><dt>Design and methods</dt><dd>Human centered design, human computer interaction, UI and UX design</dd></div>
+      <div><dt>Professional</dt><dd>Problem solving, strategic leadership, project management and delivery, client relations</dd></div>
+    </dl>
   </section>
 
   <section id="contact">
