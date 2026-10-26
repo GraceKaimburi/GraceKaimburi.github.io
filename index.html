@@ -186,21 +186,9 @@
   .venue { font-size: 0.95rem; font-style: italic; color: var(--muted); }
   .body p { font-size: 1rem; }
 
-  .feature { display: grid; gap: 1.5rem 2.5rem; grid-template-columns: minmax(0, 1fr); padding-block: 1.6rem; border-bottom: 1px solid var(--rule); }
-  @media (min-width: 52rem) { .feature { grid-template-columns: minmax(0, 1fr) minmax(0, 20rem); align-items: start; } }
+  .feature { display: block; padding-block: 1.6rem; border-bottom: 1px solid var(--rule); }
   .feature h3 { font-size: 1.3rem; }
   .feature .body { gap: 0.8rem; }
-  .figure { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
-  .ptable { display: grid; grid-template-columns: repeat(18, minmax(0, 1fr)); gap: 2px; }
-  .ptable i { aspect-ratio: 1; display: block; background: var(--accent); border-radius: 1px; }
-  .ptable i.gap { background: transparent; }
-  .ptable i.p { opacity: 0.6; }
-  .ptable i.d { opacity: 0.35; }
-  .ptable i.f { opacity: 0.18; }
-  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
-  .legend i { width: 0.7rem; height: 0.7rem; background: var(--accent); display: inline-block; border-radius: 1px; }
-  figcaption { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
 
   .pipeline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
   .step { font-family: var(--font-mono); font-size: 0.9rem; padding: 0.3rem 0.7rem; background: var(--tint); border-radius: 2px; }
@@ -295,9 +283,10 @@
     </div>
 
     <div class="panel" id="panel-research" role="tabpanel" aria-labelledby="tab-research">
-      <article class="feature">
+      <article class="row">
+        <div class="status"><strong>Accepted</strong>NeurIPS 2026</div>
         <div class="body">
-          <p class="venue">Accepted · Women in Machine Learning Workshop at NeurIPS 2026</p>
+          <p class="venue">Women in Machine Learning workshop</p>
           <h3>A periodic table wide DFT benchmark with machine learning surrogates for combustion pollutant adsorbents</h3>
           <p>A benchmark of density functional theory binding energies across the periodic table, paired with machine learning surrogates, aimed at adsorbents for combustion pollutants.</p>
           <div class="tags">
@@ -307,16 +296,6 @@
             <span class="tag-pill">Air quality</span>
           </div>
         </div>
-        <figure class="figure" aria-label="Periodic table coloured by electron block">
-          <div class="ptable" id="ptable" aria-hidden="true"></div>
-          <div class="legend" aria-hidden="true">
-            <span><i style="opacity:1"></i>s</span>
-            <span><i style="opacity:0.6"></i>p</span>
-            <span><i style="opacity:0.35"></i>d</span>
-            <span><i style="opacity:0.18"></i>f</span>
-          </div>
-          <figcaption>The periodic table by electron block, the scope of the benchmark.</figcaption>
-        </figure>
       </article>
 
       <article class="row">
@@ -517,30 +496,6 @@
     var fromHash = location.hash.replace('#', '');
     openTab(['research', 'work', 'leadership'].indexOf(fromHash) !== -1 ? fromHash : 'research');
 
-    // ---- Periodic table figure: which of the 18 columns hold an element in each row ----
-    function range(a, b) { var o = []; for (var i = a; i <= b; i++) o.push(i); return o; }
-    var rows = [
-      [1, 18], [1, 2, 13, 14, 15, 16, 17, 18], [1, 2, 13, 14, 15, 16, 17, 18],
-      range(1, 18), range(1, 18), range(1, 18), range(1, 18), null,
-      range(4, 17), range(4, 17)
-    ];
-    function block(r, c) {
-      if (r >= 8) return 'f';
-      if (c <= 2 || (r === 0 && c === 18)) return 's';
-      if (c >= 13) return 'p';
-      if (c === 3 && r >= 5) return 'f';
-      return 'd';
-    }
-    var host = document.getElementById('ptable');
-    if (host) {
-      var html = '';
-      rows.forEach(function (cols, r) {
-        for (var c = 1; c <= 18; c++) {
-          html += (cols && cols.indexOf(c) !== -1) ? '<i class="' + block(r, c) + '"></i>' : '<i class="gap"></i>';
-        }
-      });
-      host.innerHTML = html;
-    }
   })();
 </script>
 </body>
